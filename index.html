@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>15-Year Work Anniversary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif; /* premium serif font */
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #3a2e4d; /* rich dark purple tone */
+      background: linear-gradient(135deg, #f3e5f5, #e0f7fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 2px rgba(58, 46, 77, 0.15);
+    }
+
+    .subtitle {
+      font-family: 'Playfair Display', serif;  /* keep consistent */
+      font-size: 18px;
+      color: #5e4a7e; /* muted purple */
+      line-height: 1.8;
+      margin-bottom: 20px;
+      perspective: 800px;
+      transform-style: preserve-3d;
+      animation: popup3d 1s ease forwards;
+      transform-origin: center;
+      letter-spacing: 0.01em;
+      font-weight: 400;
+      text-shadow: 0 1px 3px rgba(94, 74, 126, 0.1);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      width: 100%;
+      padding: 50px 40px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      z-index: 2;
+
+      /* Initially hidden with opacity and shifted down */
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      pointer-events: none; /* disable interaction when hidden */
+    }
+    /* Visible state */
+    .glass-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: #3f3f3f;
+      margin-bottom: 20px;
+    }
+
+    @keyframes popup3d {
+      0% {
+        transform: translateZ(-50px) scale(0.8);
+        opacity: 0;
+        text-shadow: none;
+      }
+      70% {
+        transform: translateZ(20px) scale(1.05);
+        opacity: 1;
+        text-shadow: 0 5px 10px rgba(0,0,0,0.15);
+      }
+      100% {
+        transform: translateZ(0) scale(1);
+        opacity: 1;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #6a1b9a;
+    }
+    .footer {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 30px;
+      background-color: #6a1b9a;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      cursor: default;
+    }
+    .footer:hover {
+      background-color: #4a148c;
+    }
+    .badge {
+      background-color: #fff;
+      color: #6a1b9a;
+      font-weight: bold;
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    /* Credit Card Falling Animation Container */
+    .credit-cards-fall {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+      user-select: none;
+    }
+
+    /* Credit card shape */
+    .credit-card {
+      position: absolute;
+      width: 50px;
+      height: 32px;
+      background: linear-gradient(135deg, #223660, #3b4f8a);
+      border-radius: 8px;
+      box-shadow: 0 0 10px #3b4f8acc;
+      opacity: 0.85;
+      transform-origin: center;
+      animation-name: fallRotate;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      filter: drop-shadow(0 0 5px #22366088);
+      color: #a0a0a0; /* darker gray, elegant and visible */
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7); /* stronger shadow for depth */
+      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+
+    /* White stripe on the credit card */
+    .credit-card::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 6px;
+      width: 38px;
+      height: 6px;
+      background: #fff;
+      border-radius: 2px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* Falling and rotating animation */
+    @keyframes fallRotate {
+      0% {
+        transform: translateY(-40px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .glass-card {
+        padding: 30px 20px;
+      }
+      .title {
+        font-size: 26px;
+      }
+      .subtitle {
+        font-size: 16px;
+      }
+      .credit-card {
+        width: 40px;
+        height: 26px;
+        font-size: 9px;
+      }
+      .credit-card::before {
+        width: 30px;
+        height: 5px;
+        top: 6px;
+        left: 5px;
+      }
+    }
+
+    .loader-card-container {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #0d1b3d, #1a2a6c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 1s ease;
+      perspective: 1500px;
+    }
+
+    .card-wrapper {
+      width: 320px;
+      height: 200px;
+      position: relative;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      animation: flipCard 1.4s ease forwards;
+      animation-delay: 7s; /* hold front for 2 seconds before flipping */
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      backface-visibility: hidden;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(106, 27, 154, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, #1f2c4d, #31456c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stripe-background {
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.08) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffffcc;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+      letter-spacing: 2px;
+    }
+
+    .card-back {
+      background: linear-gradient(135deg, #223660, #3b4f8a);
+      transform: rotateY(180deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      text-align: center;
+      padding: 20px;
+      animation: fadeInText 1s ease 1.2s forwards;
+      opacity: 0;
+    }
+
+    .loader-message strong {
+      font-size: 28px;
+      display: block;
+      margin-top: 5px;
+      color: #ffd700;
+    }
+
+    @keyframes flipCard {
+      0% { transform: rotateY(0); }
+      100% { transform: rotateY(180deg); }
+    }
+
+    @keyframes fadeInText {
+      to { opacity: 1; }
+    }
+
+    .chip {
+      width: 40px;
+      height: 30px;
+      background: linear-gradient(145deg, #b0b0b0, #dcdcdc);
+      border-radius: 6px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2px;
+      box-sizing: border-box;
+      z-index: 2;
+    }
+
+    .chip::before,
+    .chip::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .chip::after {
+      margin-top: 4px;
+    }
+
+    .shine {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 60%
+      );
+      transform: rotate(25deg);
+      animation: shineAnim 8s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes shineAnim {
+      0% {
+        transform: translateX(-100%) rotate(25deg);
+      }
+      100% {
+        transform: translateX(100%) rotate(25deg);
+      }
+    }
+
+   .splash-photo {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeOutSplash 3s ease 4s forwards;
+  overflow: hidden;
+}
+
+.splash-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(1.05) contrast(1.1);
+}
+
+.splash-overlay-text {
+  position: absolute;
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  animation: popIn 1.5s ease 2s forwards;
+  opacity: 0;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutSplash {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+
+.cracker-impact {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffd700aa;
+  animation: moveSpark 2s linear forwards;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes moveSpark {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(0.8);
+  }
+}
+
+.rocket {
+  position: fixed;
+  width: 6px;
+  height: 20px;
+  background: linear-gradient(to top, #ff0, #f00);
+  border-radius: 3px;
+  z-index: 20;
+  animation: rocketLaunch 1s ease-out forwards;
+}
+
+@keyframes rocketLaunch {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-300px);
+    opacity: 0.8;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Splash Photo Page with Overlay -->
+  <div class="loader-card-container" id="loader">
+    <div class="card-wrapper">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="stripe-background">
+            <div class="chip"></div>
+            <span class="brand-text">TSYS</span>
+            <div class="shine"></div>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="loader-message">
+            🎉 Congratulations<br><strong>Gaurav Taneja</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="splash-photo" id="splashPhoto">
+  <img src="./gaurav.jpg" alt="Work Anniversary Celebration Photo" />
+  <div class="splash-overlay-text">
+    Celebrating <strong>15 Years</strong> of Excellence
+  </div>
+</div>
+
+  <div class="glass-card" role="main" aria-label="15 Year Work Anniversary Celebration Card">
+    <div class="badge">15 Years of Dedication</div>
+    <h1 class="title">🎉 Congratulations Gaurav Taneja on 15 Incredible Years!</h1>
+    <p class="subtitle">
+      We’re honored to celebrate your <span class="highlight">15-year journey</span> with <span class="highlight">TSYS - A Global Payments Company</span>.
+      Your <span class="highlight">dedication</span>, <span class="highlight">visionary leadership</span>, and <span class="highlight">unwavering commitment</span> have been truly inspiring.
+    </p>
+    <p class="subtitle">
+      You have not only shaped our path to success but set a timeless example of excellence and integrity. Thank you for everything.
+    </p>
+    <a href="#" class="footer" tabindex="-1">With Deepest Appreciation — Soban Imam</a>
+    <div class="cracker-impact" aria-hidden="true">
+  <div class="spark"></div>
+</div>
+  </div>
+
+  <!-- Credit Card Falling Effect -->
+  <div class="credit-cards-fall" aria-hidden="true" id="creditCardsFall"></div>
+
+  <script>
+    const container = document.getElementById('creditCardsFall');
+    const numberOfCards = 30;
+
+    for (let i = 0; i < numberOfCards; i++) {
+      const card = document.createElement('div');
+      card.classList.add('credit-card');
+      card.textContent = 'TSYS';
+
+      // Random horizontal position across the viewport width
+      card.style.left = Math.random() * 100 + 'vw';
+
+      // Random animation duration (fall speed)
+      card.style.animationDuration = (5 + Math.random() * 5) + 's'; // 5-10s fall duration
+
+      // Random animation delay so cards start falling at different times
+      card.style.animationDelay = (Math.random() * 10) + 's';
+
+      // Random rotation direction for natural look
+      card.style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
+
+      container.appendChild(card);
+    }
+
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      const glassCard = document.querySelector('.glass-card');
+
+      setTimeout(() => {
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+
+        setTimeout(() => {
+          glassCard.classList.add('visible');
+        }, 2000);
+      }, 11000);
+    });
+
+  function launchSparksRepeatedly(durationMs = 10000, intervalMs = 200) {
+  const card = document.querySelector('.glass-card');
+  const rect = card.getBoundingClientRect();
+
+  const intervalId = setInterval(() => {
+    for (let i = 0; i < 10; i++) {
+      const spark = document.createElement('div');
+      spark.classList.add('spark');
+
+      // Start near the left center of the card
+      spark.style.left = rect.left + 20 + 'px';
+      spark.style.top = (rect.top + rect.height / 2) + 'px';
+
+      // Random direction
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 80 + Math.random() * 120;
+      const dx = Math.cos(angle) * distance + 'px';
+      const dy = Math.sin(angle) * distance + 'px';
+
+      spark.style.setProperty('--x', dx);
+      spark.style.setProperty('--y', dy);
+
+      document.body.appendChild(spark);
+
+      // Remove after 2s
+      setTimeout(() => spark.remove(), 2000);
+    }
+  }, intervalMs);
+
+  // Stop emitting after duration
+  setTimeout(() => {
+    clearInterval(intervalId);
+  }, durationMs);
+}
+
+
+function launchRocket() {
+  const rocket = document.createElement('div');
+  rocket.classList.add('rocket');
+
+  // Random X position near center of the screen
+  const x = window.innerWidth / 2 + (Math.random() * 100 - 50);
+  rocket.style.left = `${x}px`;
+  rocket.style.bottom = `30px`;
+
+  document.body.appendChild(rocket);
+
+  // Explode into sparks after 1s (when rocket reaches top)
+  setTimeout(() => {
+    rocket.remove();
+    for (let i = 0; i < 15; i++) {
+      const spark = document.createElement('div');
+      spark.classList.add('spark');
+
+      spark.style.left = `${x}px`;
+      spark.style.top = `${window.innerHeight - 330}px`;
+
+      const angle = Math.random() * 2 * Math.PI;
+      const distance = 60 + Math.random() * 60;
+      const dx = Math.cos(angle) * distance + 'px';
+      const dy = Math.sin(angle) * distance + 'px';
+
+      spark.style.setProperty('--x', dx);
+      spark.style.setProperty('--y', dy);
+
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 1500);
+    }
+  }, 1000);
+}
+
+// Start sparks after initial animation (e.g. 13s delay)
+setTimeout(() => {
+  // Launch sparks for 10s
+  launchSparksRepeatedly(10000, 200);
+
+  // Also launch rockets every 1s for 10s
+  const rocketInterval = setInterval(launchRocket, 1000);
+  setTimeout(() => clearInterval(rocketInterval), 10000);
+}, 13000);
+
+  </script>
+</body>
+</html>
